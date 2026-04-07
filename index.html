@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>OR & Cleanroom Validation Studio</title>
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="brand-logo">🧪</div>
+        <div>
+          <h2>Validation Studio</h2>
+          <p>Clinical Engineering Suite</p>
+        </div>
+      </div>
+
+      <nav class="nav">
+        <button class="nav-btn active" data-page="dashboard">📊 Dashboard</button>
+        <button class="nav-btn" data-page="rooms">🏥 Rooms</button>
+        <button class="nav-btn" data-page="devices">🛠 Devices</button>
+        <button class="nav-btn" data-page="tests">📏 Tests</button>
+        <button class="nav-btn" data-page="airflow">🌬 Airflow 3D</button>
+        <button class="nav-btn" data-page="reports">📄 Reports</button>
+        <button class="nav-btn" data-page="standards">📘 Standards</button>
+      </nav>
+
+      <div class="sidebar-footer">
+        <p>Biomedical & Validation Engineering</p>
+        <span>Portfolio Project</span>
+      </div>
+    </aside>
+
+    <main class="main">
+      <header class="topbar">
+        <div>
+          <h1>OR & Cleanroom Validation Studio</h1>
+          <p>Interactive engineering platform for critical area qualification</p>
+        </div>
+        <div class="status-pill">ISO 14644 • DIN 1946-4 • ASHRAE 170 • EN 1822</div>
+      </header>
+
+      <!-- DASHBOARD -->
+      <section class="page active" id="dashboard">
+        <div class="cards">
+          <div class="info-card glass">
+            <h3>Project</h3>
+            <div class="big">Kartal OR Validation</div>
+          </div>
+          <div class="info-card glass">
+            <h3>Current Room</h3>
+            <div class="big" id="currentRoomName">OR-01</div>
+          </div>
+          <div class="info-card glass">
+            <h3>Room Class</h3>
+            <div class="big" id="currentClass">DIN Class Ia</div>
+          </div>
+          <div class="info-card glass">
+            <h3>Overall Status</h3>
+            <div class="big" id="overallStatus">READY</div>
+          </div>
+        </div>
+
+        <div class="dashboard-grid">
+          <div class="panel glass">
+            <h2>Engineering Summary</h2>
+            <div class="summary-grid">
+              <div class="summary-box">
+                <span>Air Velocity</span>
+                <strong id="sumVelocity">0.00 m/s</strong>
+              </div>
+              <div class="summary-box">
+                <span>Differential Pressure</span>
+                <strong id="sumDP">0.0 Pa</strong>
+              </div>
+              <div class="summary-box">
+                <span>Temperature</span>
+                <strong id="sumTemp">0.0 °C</strong>
+              </div>
+              <div class="summary-box">
+                <span>Humidity</span>
+                <strong id="sumRH">0.0 %</strong>
+              </div>
+            </div>
+
+            <div class="ticker">
+              <span id="liveTicker">
+                Validation engine loaded • Airflow monitoring ready • Device library synced • Awaiting engineering input •
+              </span>
+            </div>
+          </div>
+
+          <div class="panel glass">
+            <h2>Critical Area Visual</h2>
+            <div class="room-3d">
+              <div class="room-top">LAF / LTF Ceiling</div>
+              <div class="stream s1"></div>
+              <div class="stream s2"></div>
+              <div class="stream s3"></div>
+              <div class="stream s4"></div>
+              <div class="stream s5"></div>
+              <div class="stream s6"></div>
+              <div class="table-3d">Operating Table</div>
+              <div class="wall-left"></div>
+              <div class="wall-right"></div>
+              <div class="floor-grid"></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ROOMS -->
+      <section class="page" id="rooms">
+        <div class="panel glass">
+          <h2>Room Designer</h2>
+          <div class="form-grid">
+            <div class="field">
+              <label>Room Name</label>
+              <input type="text" id="roomName" value="OR-01" />
+            </div>
+            <div class="field">
+              <label>Room Type</label>
+              <select id="roomType">
+                <option>Operating Room</option>
+                <option>Cleanroom</option>
+                <option>IVF Lab</option>
+                <option>Isolation Room</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>Target Class</label>
+              <select id="targetClass">
+                <option>DIN Class Ia</option>
+                <option>DIN Class Ib</option>
+                <option>ISO 7</option>
+                <option>ISO 8</option>
+              </select>
+            </div>
+            <div class="field">
+              <label>LTF Size</label>
+              <input type="text" id="ltfSize" value="3.2 m x 3.2 m" />
+            </div>
+          </div>
+
+          <div class="room-layout">
+            <div class="layout-box">
+              <div class="layout-ltf">LTF</div>
+              <div class="layout-table">Table</div>
+              <div class="layout-return left-return">Return</div>
+              <div class="layout-return right-return">Return</div>
+              <div class="layout-door">Door</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- DEVICES -->
+      <section class="page" id="devices">
+        <div class="panel glass">
+          <h2>Validation Device Library</h2>
+          <div class="device-grid" id="deviceGrid"></div>
+        </div>
+      </section>
+
+      <!-- TESTS -->
+      <section class="page" id="tests">
+        <div class="tests-grid">
+          <div class="panel glass">
+            <h2>Measurement Input</h2>
+
+            <div class="form-grid">
+              <div class="field">
+                <label>Average Air Velocity (m/s)</label>
+                <input type="number" step="0.01" id="airVelocity" />
+              </div>
+              <div class="field">
+                <label>Differential Pressure (Pa)</label>
+                <input type="number" step="0.1" id="diffPressure" />
+              </div>
+              <div class="field">
+                <label>Temperature (°C)</label>
+                <input type="number" step="0.1" id="temperature" />
+              </div>
+              <div class="field">
+                <label>Humidity (%)</label>
+                <input type="number" step="0.1" id="humidity" />
+              </div>
+              <div class="field">
+                <label>Particle ≥0.5 µm</label>
+                <input type="number" id="particle05" />
+              </div>
+              <div class="field">
+                <label>Particle ≥5.0 µm</label>
+                <input type="number" id="particle5" />
+              </div>
+              <div class="field">
+                <label>ACH</label>
+                <input type="number" step="0.1" id="ach" />
+              </div>
+              <div class="field">
+                <label>Turbulence Intensity (%)</label>
+                <input type="number" step="0.1" id="ti" />
+              </div>
+            </div>
+
+            <div class="field full">
+              <label>Engineer Notes</label>
+              <textarea id="notes" placeholder="Document airflow pattern, balancing observations, filter concerns, recovery behavior..."></textarea>
+            </div>
+
+            <div class="btn-row">
+              <button class="btn primary" id="analyzeBtn">Run Analysis</button>
+              <button class="btn secondary" id="resetBtn">Reset</button>
+            </div>
+          </div>
+
+          <div class="panel glass">
+            <h2>Evaluation Result</h2>
+            <div id="statusBox" class="status-box neutral">Awaiting analysis...</div>
+            <div id="criteriaList" class="criteria-list"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- AIRFLOW -->
+      <section class="page" id="airflow">
+        <div class="panel glass">
+          <h2>Airflow 3D Concept Scene</h2>
+          <div class="airflow-scene">
+            <div class="scene-room">
+              <div class="scene-ltf">HEPA / LTF Zone</div>
+              <div class="scene-stream a"></div>
+              <div class="scene-stream b"></div>
+              <div class="scene-stream c"></div>
+              <div class="scene-stream d"></div>
+              <div class="scene-stream e"></div>
+              <div class="scene-table">Critical Zone</div>
+            </div>
+          </div>
+          <p class="scene-note">
+            This section gives a conceptual 3D-like engineering visualization of unidirectional airflow over the protected critical area.
+          </p>
+        </div>
+      </section>
+
+      <!-- REPORTS -->
+      <section class="page" id="reports">
+        <div class="panel glass">
+          <h2>Generated Report</h2>
+          <pre id="reportOutput" class="report-output">No report generated yet.</pre>
+          <div class="btn-row">
+            <button class="btn primary" id="downloadBtn">Download TXT Report</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- STANDARDS -->
+      <section class="page" id="standards">
+        <div class="panel glass">
+          <h2>Standards Reference Panel</h2>
+          <div class="standards-grid" id="standardsGrid"></div>
+        </div>
+      </section>
+    </main>
+  </div>
+
+  <script src="data.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
